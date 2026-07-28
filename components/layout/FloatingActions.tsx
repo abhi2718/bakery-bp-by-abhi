@@ -31,7 +31,8 @@ export default function FloatingActions() {
         </a>
         <button className="btn btn-primary" type="button" onClick={openDrawer}>
           <CartIcon />
-          View basket <span className="pill">{count}</span>
+          View basket
+          {count > 0 ? <span className="pill">{count}</span> : null}
         </button>
       </div>
     </>

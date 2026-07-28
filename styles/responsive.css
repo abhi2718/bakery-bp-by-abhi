@@ -50,7 +50,17 @@
   .steps { grid-template-columns: 1fr; }
   .hero-cta { flex-direction: column; align-items: stretch; }
   .hero-cta .btn { width: 100%; }
-  .badge-float { flex-direction: column; align-items: flex-start; gap: 10px; }
+  /* taller frame + compact overlays so the cake stays visible behind them */
+  .hero-media { aspect-ratio: 4/4.4; max-height: 520px; }
+  .pill-float { top: 14px; left: 14px; padding: 7px 13px; font-size: .72rem; }
+  .badge-float {
+    left: 14px; right: 14px; bottom: 14px;
+    padding: 12px 14px; gap: 11px;
+  }
+  .badge-float .g { width: 32px; height: 32px; border-radius: 10px; }
+  .badge-float .g svg { width: 17px; height: 17px; }
+  .badge-float b { font-size: .88rem; }
+  .badge-float .sub { font-size: .74rem; }
   .panel { padding: 28px 22px; }
   .about-quote { padding: 28px 24px; }
   .foot-bottom { flex-direction: column; }

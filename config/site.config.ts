@@ -96,7 +96,7 @@ export const site: SiteConfig = {
      and `p1`/`p2` against white before shipping.
      --------------------------------------------------------------------- */
   theme: {
-    default: "light",
+    default: "dark",
     toggle: true,
     light: {
       p1: "#3d1810",
