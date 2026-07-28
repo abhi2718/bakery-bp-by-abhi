@@ -1,0 +1,63 @@
+/* ============================================================
+   RESPONSIVE — must load last, so these overrides win.
+   ============================================================ */
+
+@media (max-width: 1040px) {
+  .links { display: none; }
+  .burger { display: grid; }
+  .mobile-menu { display: block; }
+  .nav-actions .btn { display: none; }
+}
+
+@media (max-width: 980px) {
+  .section { padding: 78px 0; }
+  .section.tight { padding-top: 0; }
+  .hero { padding: 56px 0 70px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 44px; }
+  .hero-media { aspect-ratio: 4/3.2; max-height: 460px; }
+  .about-grid { grid-template-columns: 1fr; gap: 34px; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .split { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr; gap: 38px; }
+}
+
+@media (max-width: 760px) {
+  body { padding-bottom: 82px; }
+  .fab { display: none; }
+  .mobile-bar { display: flex; }
+  .toast { bottom: 96px; }
+  .scoreboard { grid-template-columns: repeat(2, 1fr); margin-top: 52px; }
+  .gal { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .foot-cols { grid-template-columns: 1fr 1fr; }
+  .cta-band { padding: 56px 0; border-radius: 26px; }
+  /* the filter row becomes a swipeable rail */
+  .filters {
+    flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start;
+    padding: 4px var(--gutter) 12px; margin: 0 calc(var(--gutter) * -1);
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .filters::-webkit-scrollbar { display: none; }
+  .chip { flex: none; }
+  .swipe-hint { display: flex; }
+  .drawer { width: 100vw; }
+}
+
+@media (max-width: 560px) {
+  .section { padding: 64px 0; }
+  .section.tight { padding-top: 0; }
+  .grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn { width: 100%; }
+  .badge-float { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .panel { padding: 28px 22px; }
+  .about-quote { padding: 28px 24px; }
+  .foot-bottom { flex-direction: column; }
+  .fld.two { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 380px) {
+  .brand .name small { display: none; }
+  .marquee-track span { font-size: 1rem; }
+}

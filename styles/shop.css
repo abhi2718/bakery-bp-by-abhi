@@ -1,0 +1,146 @@
+/* ============================================================
+   SHOP — filter chips, product grid, product card and the
+   designed tile that stands in for a missing photo.
+   ============================================================ */
+
+.shop-sec {
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.filters { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 14px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 11px 20px; border-radius: 999px; cursor: pointer;
+  background: var(--surface); border: 1px solid var(--line); color: var(--muted);
+  font-family: inherit; font-weight: 700; font-size: .88rem;
+  transition: transform .22s cubic-bezier(.2,.7,.3,1), border-color .22s,
+              color .22s, background .22s, box-shadow .22s;
+}
+.chip:hover { transform: translateY(-2px); border-color: var(--line-strong); color: var(--text); }
+.chip[aria-pressed="true"] {
+  background: var(--spot); color: #fff; border-color: transparent;
+  box-shadow: 0 14px 30px -16px rgba(140, 64, 35, .9);
+}
+.chip .qty { font-size: .78rem; opacity: .72; font-weight: 600; }
+
+.shop-count {
+  text-align: center; font-size: .86rem; color: var(--muted-dim);
+  font-weight: 600; margin-bottom: 34px;
+}
+
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+.prod {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: transform .3s cubic-bezier(.2,.7,.3,1), border-color .3s, box-shadow .3s;
+  animation: pop .38s cubic-bezier(.2,.8,.3,1) backwards;
+}
+@keyframes pop { from { opacity: 0; transform: translateY(14px) scale(.98); } }
+@media (prefers-reduced-motion: reduce) { .prod { animation: none; } }
+.prod:hover { transform: translateY(-6px); border-color: var(--line-strong); box-shadow: var(--shadow-card); }
+
+.prod .shot { position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--surface-2); }
+.prod .shot img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  transition: transform .5s cubic-bezier(.2,.7,.3,1);
+}
+.prod:hover .shot img { transform: scale(1.06); }
+
+/* ---- designed tile, shown when a product has no photo yet ----
+   Each category gets its own depth of the brand gradient so the grid keeps
+   its rhythm, with a matching line icon watermarked over it. Setting `img`
+   on the product replaces this entirely. */
+.tile { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden; }
+.tile::after { /* faint scalloped texture */
+  content: ""; position: absolute; inset: 0; opacity: .16;
+  background-image: radial-gradient(circle at 50% 100%, var(--bg) 8px, transparent 9px);
+  background-size: 34px 34px;
+}
+.tile svg {
+  width: 44%; max-width: 120px; height: auto; color: var(--salmon); opacity: .9;
+  position: relative; z-index: 1; transition: transform .5s cubic-bezier(.2,.7,.3,1);
+}
+.prod:hover .tile svg { transform: scale(1.07) translateY(-2px); }
+.tile { background: linear-gradient(var(--ta, 140deg), var(--p1), var(--p2)); }
+/* three tonal variants so two cards in the same category never look identical */
+.tile[data-v="1"] { --ta: 215deg; filter: brightness(1.28) saturate(1.1); }
+.tile[data-v="1"]::after { background-size: 25px 25px; opacity: .2; }
+.tile[data-v="2"] { --ta: 80deg; filter: brightness(.78); }
+.tile[data-v="2"]::after { background-size: 46px 46px; opacity: .13; }
+
+.prod .tagline {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  background: var(--glass); backdrop-filter: blur(8px);
+  border: 1px solid var(--line-strong); border-radius: 999px;
+  padding: 5px 13px; font-size: .755rem; font-weight: 800; letter-spacing: .03em;
+}
+.prod .tagline.hot { background: var(--spot); color: #fff; border-color: transparent; }
+.prod .ls-mark {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--glass); backdrop-filter: blur(8px);
+  border: 1px solid var(--line-strong); color: var(--accent);
+}
+.prod .ls-mark svg { width: 15px; height: 15px; }
+
+.prod .body { padding: 22px 20px 20px; display: flex; flex-direction: column; gap: 11px; flex: 1; }
+.prod h3 { font-size: 1.16rem; }
+.prod .desc { color: var(--muted); font-size: .9rem; line-height: 1.55; flex: 1; }
+
+.opt-row { display: flex; gap: 9px; align-items: center; }
+.sel {
+  flex: 1; min-width: 0; appearance: none; -webkit-appearance: none;
+  font-family: inherit; font-size: .88rem; font-weight: 700; color: var(--text);
+  background: var(--field); border: 1px solid var(--line-strong); border-radius: 12px;
+  padding: 10px 34px 10px 13px; cursor: pointer; min-height: 44px; /* comfortable thumb target */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a2542a' stroke-width='2.5' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat: no-repeat; background-position: right 11px center; background-size: 15px;
+  transition: border-color .2s;
+}
+.sel:hover, .sel:focus { border-color: var(--accent); }
+:root[data-theme="dark"] .sel {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23eda86a' stroke-width='2.5' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>");
+}
+.prod .price {
+  font-family: var(--font-display), serif; font-weight: 700; font-size: 1.42rem;
+  letter-spacing: -.02em; white-space: nowrap;
+}
+
+.ls-toggle {
+  display: flex; align-items: center; gap: 9px; cursor: pointer;
+  font-size: .82rem; font-weight: 700; color: var(--muted);
+  padding: 11px 12px; border-radius: 12px; background: var(--surface-2); min-height: 44px;
+  border: 1px solid var(--line); transition: border-color .2s, color .2s;
+}
+.ls-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.ls-toggle input {
+  appearance: none; -webkit-appearance: none; flex: none;
+  width: 20px; height: 20px; border-radius: 6px; cursor: pointer;
+  border: 1.5px solid var(--line-strong); background: var(--field);
+  transition: background .2s, border-color .2s; position: relative;
+}
+.ls-toggle input:checked { background: var(--spot); border-color: transparent; }
+.ls-toggle input:checked::after {
+  content: ""; position: absolute; left: 6.5px; top: 2.5px; width: 5px; height: 10px;
+  border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(42deg);
+}
+/* products that can't be made lighter get an empty row of the same height, so
+   the dropdown and the button line up across every card in a row */
+.ls-spacer { display: block; height: 44px; }
+.prod .add { width: 100%; margin-top: 2px; }
+.prod .add.added { background: var(--wa); color: #06301a; box-shadow: none; }
+
+.empty-shop {
+  grid-column: 1/-1; text-align: center; padding: 64px 20px; color: var(--muted);
+  border: 1px dashed var(--line-strong); border-radius: var(--radius);
+}
+
+.swipe-hint {
+  display: none; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 18px; font-size: .8rem; font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--muted-dim);
+}
+.swipe-hint svg { width: 15px; height: 15px; }
