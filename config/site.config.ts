@@ -393,7 +393,7 @@ export const site: SiteConfig = {
         ],
       },
     ],
-    credit: "Abhishek Singh",
+    credit: "Sonam",
     creditUrl: "",
   },
 };
